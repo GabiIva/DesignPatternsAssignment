@@ -1,29 +1,28 @@
 using System;
 
-namespace DesignPatterns
-{
-    public interface INotification { void Send(string message); }
+namespace DesignPatterns {
+    public interface INotification { void Send(string msg); }
 
     public class EmailNotification : INotification {
-        public void Send(string message) => Console.WriteLine($"Email: {message}");
+        public void Send(string msg) => Console.WriteLine($"Email: {msg}");
     }
 
     public class SmsNotification : INotification {
-        public void Send(string message) => Console.WriteLine($"SMS: {message}");
+        public void Send(string msg) => Console.WriteLine($"SMS: {msg}");
     }
 
     public static class NotificationFactory {
         public static INotification Create(string type) => type.ToLower() switch {
             "email" => new EmailNotification(),
             "sms" => new SmsNotification(),
-            _ => throw new ArgumentException("Unknown notification type")
+            _ => throw new ArgumentException("Unknown type")
         };
     }
 
     class Program {
         static void Main() {
-            var notification = NotificationFactory.Create("email");
-            notification.Send("Hello from C# Simple Factory!");
+            var note = NotificationFactory.Create("email");
+            note.Send("Hello from C# Simple Factory!");
         }
     }
 }
