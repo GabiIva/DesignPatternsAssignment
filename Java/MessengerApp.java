@@ -1,32 +1,50 @@
-interface Message { void deliver(); }
-
-class SlackMessage implements Message {
-    public void deliver() { System.out.println("Изпращане в Slack..."); }
+interface MyMessage {
+    void deliver();
 }
 
-class DiscordMessage implements Message {
-    public void deliver() { System.out.println("Изпращане в Discord..."); }
+class ViberMessage implements MyMessage {
+    @Override
+    public void deliver() {
+        System.out.println("Изпращане на съобщение през Viber...");
+    }
 }
 
-abstract class Messenger {
-    public abstract Message createMessage(); 
-    public void send() {
-        Message msg = createMessage();
+class MessengerMessage implements MyMessage {
+    @Override
+    public void deliver() {
+        System.out.println("Изпращане на съобщение през Facebook Messenger...");
+    }
+}
+
+abstract class MessageService {
+    public abstract MyMessage createMessage();
+
+    public void sendMessage() {
+        MyMessage msg = createMessage();
         msg.deliver();
     }
 }
 
-class SlackMessenger extends Messenger {
-    public Message createMessage() { return new SlackMessage(); }
+class ViberService extends MessageService {
+    @Override
+    public MyMessage createMessage() {
+        return new ViberMessage();
+    }
 }
 
-class DiscordMessenger extends Messenger {
-    public Message createMessage() { return new DiscordMessage(); }
+class MessengerService extends MessageService {
+    @Override
+    public MyMessage createMessage() {
+        return new MessengerMessage();
+    }
 }
 
 public class MessengerApp {
     public static void main(String[] args) {
-        Messenger app = new SlackMessenger();
-        app.send();
+        MessageService service = new ViberService();
+        service.sendMessage();
+        
+        MessageService secondService = new MessengerService();
+        secondService.sendMessage();
     }
 }
