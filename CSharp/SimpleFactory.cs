@@ -2,7 +2,6 @@ using System;
 
 namespace DesignPatterns
 {
-    // Продукт
     public interface INotification { void Send(string message); }
 
     public class EmailNotification : INotification {
@@ -13,7 +12,6 @@ namespace DesignPatterns
         public void Send(string message) => Console.WriteLine($"SMS: {message}");
     }
 
-    // Simple Factory
     public static class NotificationFactory {
         public static INotification Create(string type) => type.ToLower() switch {
             "email" => new EmailNotification(),
