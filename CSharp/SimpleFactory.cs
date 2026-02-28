@@ -1,6 +1,6 @@
 using System;
 
-namespace DesignPatterns {
+namespace MyDesignPatterns Project {
     public interface INotification { void Send(string msg); }
 
     public class EmailNotification : INotification {
