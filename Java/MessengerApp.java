@@ -39,7 +39,7 @@ class MessengerService extends MessageService {
     }
 }
 
-public class MessengerApp {
+public class Main {
     public static void main(String[] args) {
         MessageService service = new ViberService();
         service.sendMessage();
