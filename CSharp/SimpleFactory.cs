@@ -12,6 +12,7 @@ namespace DesignPatterns {
     }
 
     public static class NotificationFactory {
+        
         public static INotification Create(string type) => type.ToLower() switch {
             "email" => new EmailNotification(),
             "sms" => new SmsNotification(),
